@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 3.5.6
+-- version 3.3.9
 -- http://www.phpmyadmin.net
 --
--- Client: localhost
--- Généré le: Lun 25 Février 2013 à 18:34
--- Version du serveur: 5.5.30
--- Version de PHP: 5.4.11
+-- Serveur: localhost
+-- Généré le : Mar 26 Février 2013 à 14:18
+-- Version du serveur: 5.5.8
+-- Version de PHP: 5.3.5
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -130,6 +129,26 @@ INSERT INTO `events_users` (`id`, `event_id`, `user_id`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `groups`
+--
+
+CREATE TABLE IF NOT EXISTS `groups` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `name` char(15) CHARACTER SET utf8 NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Contenu de la table `groups`
+--
+
+INSERT INTO `groups` (`id`, `name`) VALUES
+(1, 'administrators'),
+(2, 'members');
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `messages`
 --
 
@@ -200,7 +219,8 @@ INSERT INTO `recipes` (`id`, `name`, `description`, `image`) VALUES
 
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(60) DEFAULT NULL,
+  `username` varchar(60) DEFAULT NULL,
+  `password` char(50) CHARACTER SET utf8 DEFAULT NULL,
   `email` varchar(150) DEFAULT NULL,
   `bio` varchar(1000) DEFAULT NULL,
   `sexe` tinyint(1) DEFAULT NULL,
@@ -208,18 +228,18 @@ CREATE TABLE IF NOT EXISTS `users` (
   `mood_id` int(11) DEFAULT NULL,
   `created` datetime DEFAULT NULL,
   `last_seen` datetime DEFAULT NULL,
+  `group_id` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Contenu de la table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `bio`, `sexe`, `image`, `mood_id`, `created`, `last_seen`) VALUES
-(1, 'Paul', 'paul@paul', 'Je m''appel Paul', 1, '1.png', 1, '2013-02-25 11:00:00', '2013-02-25 11:00:00'),
-(2, 'Bob', 'bob@bob', 'Je m''appel Bob', 1, '10.png', 2, '2013-02-25 11:00:00', '2013-02-25 11:00:00'),
-(3, 'Alice', 'alice@alice', 'Je m''appel Alice', 0, '3.png', 3, '2013-02-25 11:00:00', '2013-02-25 11:00:00');
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+INSERT INTO `users` (`id`, `username`, `password`, `email`, `bio`, `sexe`, `image`, `mood_id`, `created`, `last_seen`, `group_id`) VALUES
+(1, 'Paul', 'test', 'paul@paul', 'Je m''appel Paul', 1, '1.png', 1, '2013-02-25 11:00:00', '2013-02-25 11:00:00', 1),
+(2, 'Bob', NULL, 'bob@bob', 'Je m''appel Bob', 1, '10.png', 2, '2013-02-25 11:00:00', '2013-02-25 11:00:00', 1),
+(3, 'Alice', NULL, 'alice@alice', 'Je m''appel Alice', 0, '3.png', 3, '2013-02-25 11:00:00', '2013-02-25 11:00:00', 1),
+(4, 'nico', '7c35cc168923ce7cfbf1c0be54637a6b1885587f', 'nico@nico.fr', 'mhhh', 1, 'nico.jpg', NULL, '2013-02-26 09:07:11', '2013-02-26 09:06:00', 2),
+(5, 'test', '7c35cc168923ce7cfbf1c0be54637a6b1885587f', 'test@test.fr', 'Vag y ', 0, 'vagy.png', NULL, '2013-02-26 09:49:59', '2013-02-26 09:49:00', 2),
+(6, 'admin', '1d760f0957cc7d6da138cca03d1c68e7aff237b8', 'admin@admin.fr', 'fezfefez', 1, 'admin.jpg', NULL, '2013-02-26 13:53:39', '2013-02-26 13:52:00', 1);
